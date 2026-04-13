@@ -1,0 +1,182 @@
+================================================================
+PLAN DE TRABAJO - Homework 1: BPN + Decision Tree
+Curso: Introduction to Data Mining
+Presentación: 17 de abril de 2026
+================================================================
+
+OBJETIVO GENERAL
+----------------
+Implementar BPN (Back-Propagation Neural Network) y Decision Tree
+en Python, aplicarlos a 2 datasets de deportes, comparar resultados
+con Weka, y presentar en PPT.
+
+Datasets elegidos:
+  - Dataset 1: Jugadores de fútbol (soccer)
+  - Dataset 2: Jugadores de NFL (NFL Combine)
+
+================================================================
+PASO 1 - BUSCAR Y ELEGIR LOS DATASETS
+================================================================
+[ ] 1.1 Buscar en Kaggle el dataset de jugadores de fútbol
+        Términos sugeridos: "football player scouting", 
+        "football player potential", "european soccer players stats"
+        - Variable objetivo (y): posición del jugador O nivel élite/no élite
+        - Features (X): stats numéricas (velocidad, pase, tiro, etc.)
+
+[ ] 1.2 Buscar en Kaggle el dataset de NFL Combine
+        Términos sugeridos: "NFL combine results", "NFL draft combine"
+        - Variable objetivo (y): seleccionado en draft o no / ronda del draft
+        - Features (X): 40-yard dash, vertical jump, bench press, etc.
+
+[ ] 1.3 Para cada dataset verificar:
+        - Tiene al menos 200-300 filas (suficiente para train/test)
+        - Tiene features numéricas (BPN las necesita)
+        - La variable objetivo es categórica (clasificación)
+        - No tiene demasiados valores faltantes
+
+================================================================
+PASO 2 - PREPARACIÓN DEL ENTORNO
+================================================================
+[ ] 2.1 Crear carpeta del proyecto con esta estructura:
+        homework1/
+        ├── data/
+        │   ├── football.csv
+        │   └── nfl.csv
+        ├── bpn_football.py
+        ├── bpn_nfl.py
+        ├── tree_football.py
+        ├── tree_nfl.py
+        └── results/
+
+[ ] 2.2 Instalar librerías necesarias:
+        pip install pandas numpy scikit-learn matplotlib seaborn
+
+================================================================
+PASO 3 - PREPROCESAMIENTO DE DATOS (para cada dataset)
+================================================================
+[ ] 3.1 Cargar el dataset con pandas
+[ ] 3.2 Exploración básica:
+        - df.info(), df.describe(), df.isnull().sum()
+        - Ver distribución de la variable objetivo
+[ ] 3.3 Limpieza:
+        - Eliminar o imputar valores nulos
+        - Eliminar columnas irrelevantes (nombres, IDs, etc.)
+[ ] 3.4 Encoding:
+        - Convertir variables categóricas a numéricas (LabelEncoder)
+[ ] 3.5 Normalización:
+        - Escalar features a rango [0,1] con MinMaxScaler
+        - Importante: BPN es sensible a la escala de los datos
+[ ] 3.6 Split train/test:
+        - 80% entrenamiento, 20% prueba
+        - Usar train_test_split con random_state fijo
+
+================================================================
+PASO 4 - IMPLEMENTAR BPN (sklearn MLPClassifier)
+================================================================
+[ ] 4.1 Implementar función de entrenamiento con parámetros variables:
+        - hidden_layer_sizes: probar (5,), (10,), (20,), (50,), (10,10)
+        - learning_rate_init: probar 0.01, 0.05, 0.1, 0.25
+        - max_iter: número máximo de iteraciones (criterio de parada 1)
+        - tol: tolerancia al error (criterio de parada 2)
+        - activation: 'logistic' (sigmoid, como en el PDF del curso)
+
+[ ] 4.2 Para cada combinación de parámetros registrar:
+        - Accuracy en train
+        - Accuracy en test
+        - Número de iteraciones hasta convergencia
+        - Tiempo de entrenamiento
+
+[ ] 4.3 Implementar función de recall (predicción sobre nuevos datos)
+        - Usar model.predict() para nuevas muestras
+        - Mostrar ejemplos concretos de predicción
+
+[ ] 4.4 Guardar resultados en tabla comparativa (DataFrame → CSV)
+
+================================================================
+PASO 5 - IMPLEMENTAR DECISION TREE (sklearn)
+================================================================
+[ ] 5.1 Implementar con DecisionTreeClassifier
+        - Probar distintos max_depth: None, 3, 5, 10
+        - criterion: 'gini' o 'entropy'
+[ ] 5.2 Registrar accuracy train/test para cada configuración
+[ ] 5.3 Visualizar el árbol con plot_tree o export_graphviz
+
+================================================================
+PASO 6 - COMPARACIÓN CON WEKA
+================================================================
+[ ] 6.1 Instalar Weka si no lo tienes: https://waikato.github.io/weka-wiki/
+[ ] 6.2 Exportar los datasets preprocesados a formato .arff o .csv
+[ ] 6.3 En Weka correr:
+        - MultilayerPerceptron (BPN): con los mismos parámetros que Python
+        - J48 (Decision Tree): equivalente a C4.5
+[ ] 6.4 Anotar los resultados de Weka:
+        - Accuracy, precision, recall, F1
+[ ] 6.5 Armar tabla comparativa Python vs Weka para ambos modelos
+
+================================================================
+PASO 7 - ANÁLISIS DE RESULTADOS
+================================================================
+[ ] 7.1 Para BPN analizar:
+        - ¿Cuántos nodos ocultos dieron mejor resultado?
+        - ¿Qué learning rate funcionó mejor?
+        - ¿Hubo overfitting con muchos nodos?
+        - ¿Cuántas iteraciones tardó en converger?
+
+[ ] 7.2 Para Decision Tree analizar:
+        - ¿Qué profundidad fue óptima?
+        - ¿Cuáles features fueron más importantes?
+
+[ ] 7.3 Comparación general:
+        - BPN Python vs BPN Weka: ¿son similares?
+        - BPN vs Decision Tree: ¿cuál es mejor para cada dataset?
+        - ¿El dataset de fútbol fue más fácil o difícil de clasificar que el NFL?
+
+================================================================
+PASO 8 - PREPARAR LA PRESENTACIÓN PPT
+================================================================
+Estructura sugerida (15 minutos = ~12-15 slides):
+
+[ ] Slide 1: Título + nombre
+[ ] Slide 2: Introducción - ¿por qué estos datasets?
+[ ] Slide 3: Dataset 1 (fútbol) - descripción, features, variable objetivo
+[ ] Slide 4: Dataset 2 (NFL) - descripción, features, variable objetivo
+[ ] Slide 5: Preprocesamiento aplicado a ambos
+[ ] Slide 6: Arquitectura del BPN implementado
+[ ] Slide 7: Resultados BPN - efecto del número de nodos ocultos
+[ ] Slide 8: Resultados BPN - efecto del learning rate
+[ ] Slide 9: Resultados Decision Tree
+[ ] Slide 10: Comparación Python vs Weka (tabla)
+[ ] Slide 11: BPN vs Decision Tree (análisis)
+[ ] Slide 12: Conclusiones
+[ ] Slide 13: Demo en vivo (opcional pero impresiona)
+
+================================================================
+ORDEN DE PRIORIDAD PARA EMPEZAR
+================================================================
+1. Conseguir los datasets (Paso 1) → es lo más urgente
+2. Preprocesamiento (Paso 3) → sin datos limpios no hay modelo
+3. BPN básico funcionando (Paso 4.1 y 4.2) → núcleo de la tarea
+4. Decision Tree (Paso 5) → más rápido de implementar
+5. Weka (Paso 6) → hacerlo después de tener resultados Python
+6. Análisis y PPT (Pasos 7 y 8) → último pero muy importante
+
+================================================================
+LIBRERÍAS CLAVE A USAR
+================================================================
+- pandas         → manejo de datos
+- numpy          → operaciones numéricas
+- sklearn        → MLPClassifier, DecisionTreeClassifier, métricas
+- matplotlib     → gráficas de accuracy vs parámetros
+- seaborn        → visualizaciones más limpias para el PPT
+
+================================================================
+NOTAS IMPORTANTES
+================================================================
+- El BPN del curso usa función sigmoid → usar activation='logistic'
+- Criterio de parada: configurar AMBOS (max_iter Y tol) y dejar que 
+  sklearn decida cuál se cumple primero
+- Normalizar SIEMPRE antes de entrenar el BPN
+- Usar el mismo random_state en todo para reproducibilidad
+- Guardar todos los resultados numéricos para el PPT
+
+================================================================
