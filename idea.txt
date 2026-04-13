@@ -42,10 +42,10 @@ PASO 2 - PREPARACIÓN DEL ENTORNO
         ├── data/
         │   ├── football.csv
         │   └── nfl.csv
-        ├── bpn_football.py
-        ├── bpn_nfl.py
-        ├── tree_football.py
-        ├── tree_nfl.py
+        ├── bpn_football.ipynb
+        ├── bpn_nfl.ipynb
+        ├── tree_football.ipynb
+        ├── tree_nfl.ipynb
         └── results/
 
 [ ] 2.2 Instalar librerías necesarias:
