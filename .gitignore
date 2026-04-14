@@ -1,1 +1,23 @@
+# Credentials
 *.json
+
+# Data files
+*.csv
+*.zip
+*.xlsx
+*.xls
+
+# Data folders
+data/
+data_football/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Environments
+.env
+venv/
+env/
