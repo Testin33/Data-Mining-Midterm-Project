@@ -10,12 +10,17 @@
 # Data folders
 data/
 data_football/
+data_fifa20/
+
 
 # Python cache
 __pycache__/
 *.pyc
 *.pyo
 .ipynb_checkpoints/
+
+# bpn_fifa20.ipynb
+# tree_fifa20.ipynb
 
 # Environments
 .env
