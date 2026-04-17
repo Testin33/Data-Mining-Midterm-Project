@@ -6,7 +6,7 @@ The BPN is designed to fulfill the core requirements of a supervised learning cl
 
 The Decision Tree classifier is trained on the same datasets using the same preprocessing pipeline, allowing for a direct and fair comparison of accuracy, precision, recall, and F1-score between both methods.
 
-Three datasets are used to validate the models: NFL Combine data (1996–2022), where the goal is to classify players into position groups based on physical measurements; FIFA 20 player data, where the model predicts a player's preferred foot using in-game skill attributes; and NBA historical stats, where the classification task is to predict whether a player was selected as an All-Star based on their seasonal performance.
+Three datasets are used to validate the models. The NFL Combine dataset (1996–2022) contains physical measurements from pre-draft evaluations, where the goal is to classify players into position groups such as Skill, Lineman, D-Line, Linebacker, Secondary, and Special Teams. The FIFA 20 player dataset includes in-game skill attributes for thousands of players worldwide, and the classification task is to predict a player's preferred foot (Left or Right). The NBA historical stats dataset spans several decades of player performance data, and the model predicts whether a player was selected as an All-Star during a given season based on their stats such as points, rebounds, assists, steals, blocks, and minutes played.
 
 Results from both Python implementations are compared against Weka, a well-known data mining workbench, to validate consistency across tools and provide an additional benchmark for model evaluation.
 
